@@ -36,13 +36,14 @@ app.use((error, req, res, next) => {
   res.json({ message: error.message || "An unknown error occurred!" });
 });
 let uri = process.env.CONNECTION_URL
+let port = process.env.PORT
 mongoose
   .connect(
     uri
   )
   .then(() => {
     console.log("Connected successfully");
-    app.listen(5000, () => {
+    app.listen(port, () => {
       console.log("Server started on port 5000");
     });
   })
