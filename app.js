@@ -11,12 +11,15 @@ const fs = require("fs");
 const path = require("path")
 app.use(bodyParser.json());
 
+app.use(cors());
 app.use("/uploads/images", express.static("uploads/images"))
 
-app.use(cors());
 
 app.use("/api/places", placesRoutes); // => /api/places...
 app.use("/api/users", usersRoutes);
+app.use("/", (req, res, next) => {
+  res.send({ message: "Hello there " });
+});
 
 app.use((req, res, next) => {
   const error = new HttpError("Could not find this route.", 404);
